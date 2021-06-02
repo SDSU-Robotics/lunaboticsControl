@@ -6,7 +6,6 @@ class AbstractCommand
     public:
     {
         virtual bool application() = 0;
-        virtual void onFinish() = 0;
         virtual void interrupt() = 0;
 
         void initialize(bool g)              //initialization
@@ -18,22 +17,14 @@ class AbstractCommand
             //finds where application finishes by stopping on finish condition
             go = !s;
         }
-        void whenFinished(float r)
-        {
-            reset = r;
-        }
-        void interrupt(int e)
-        {
-            error = e;
-        }
 
     protected:
     {
         bool go;
-        bool stop;
-        float reset;
-        int error;
     }
+
+
+
 class ExtLinAct: public AbstractCommand
 {
 
@@ -61,14 +52,8 @@ class ExtLinAct: public AbstractCommand
 
             }
         }
-        void whenFinished()
-        {
-
-        }
     }
 }
-
-
 
 int main(void)
 {
