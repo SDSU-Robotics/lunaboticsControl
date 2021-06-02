@@ -6,7 +6,7 @@ class AbstractCommand
     public:
     {
         virtual bool application() = 0;
-        virtual void interrupt() = 0;
+        virtual void resolveIssue() = 0;
 
         void initialize(bool g)              //initialization
         {
@@ -17,10 +17,15 @@ class AbstractCommand
             //finds where application finishes by stopping on finish condition
             go = !s;
         }
+        bool errorCheck(bool check)
+        {
+            check = c;
+        }
 
     protected:
     {
         bool go;
+        bool issue;
     }
 
 
@@ -31,7 +36,7 @@ class ExtLinAct: public AbstractCommand
     public:
 
                                         //will not recognize as function until
-    {                                   //class brackets are established
+    {                                   //public brackets are established due to inheritance
         bool application()                   
         {
             if(go)
@@ -57,17 +62,10 @@ class ExtLinAct: public AbstractCommand
 
 int main(void)
 {
-
-
     ExtLinAct ela;
 
     
     ela.initialize(true);
     ela.application();
     ela.executed(true);
-
-    
-
-
-
 }
