@@ -25,7 +25,7 @@ class AbstractCommand
     protected:
     {
         bool go;
-        bool issue;
+        bool check;
     }
 
 
