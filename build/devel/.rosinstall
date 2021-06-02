@@ -1,0 +1,2 @@
+- setup-file:
+    local-name: /home/jacob/catkin_ws/src/lunabotics_control/build/devel/setup.sh

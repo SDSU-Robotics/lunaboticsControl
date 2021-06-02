@@ -1,0 +1,8 @@
+prefix=/home/jacob/catkin_ws/src/lunabotics_control/build/devel
+
+Name: lunaboticsControl
+Description: Description of lunaboticsControl
+Version: 0.0.0
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: 
