@@ -8,9 +8,8 @@ using namespace std;
 class AbstractCommand
 {
     public:
-    {
-        virtual bool application();
-        virtual void resolveIssue();
+    
+        virtual bool application() = 0;
 
         void initialize(bool g)              //initialization
         {
@@ -21,16 +20,16 @@ class AbstractCommand
             //finds where application finishes by stopping on finish condition
             go = !s;
         }
-        bool errorCheck(bool check)
+        bool errorCheck(bool c)
         {
             check = c;
         }
-    }
+    
     protected:
-    {
+    
         bool go;
         bool check;
-    }
+    
 };
 
 
@@ -40,7 +39,7 @@ class ExtLinAct: public AbstractCommand
     public:
 
                                         //will not recognize as function until
-    {                                   //public brackets are established due to inheritance
+                                        //public brackets are established due to inheritance
         bool application()                   
         {
             
@@ -58,12 +57,13 @@ class ExtLinAct: public AbstractCommand
             if(!go)
             {
                 //conditions have been met
-                cout << "ExtLinAct has been executed\n\n" << endl
+                cout << "ExtLinAct has been executed\n\n" << endl;
 
             }
             
         }
-    }
+
+        void resolveIssue();    
 };
 
 int main(void)
