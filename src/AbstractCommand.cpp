@@ -1,12 +1,16 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <iostream>
+
+using namespace std;
+
 
 class AbstractCommand
-
+{
     public:
     {
-        virtual bool application() = 0;
-        virtual void resolveIssue() = 0;
+        virtual bool application();
+        virtual void resolveIssue();
 
         void initialize(bool g)              //initialization
         {
@@ -21,13 +25,13 @@ class AbstractCommand
         {
             check = c;
         }
-
+    }
     protected:
     {
         bool go;
         bool check;
     }
-
+};
 
 
 class ExtLinAct: public AbstractCommand
@@ -39,16 +43,17 @@ class ExtLinAct: public AbstractCommand
     {                                   //public brackets are established due to inheritance
         bool application()                   
         {
+            
             if(go)
             {
                 //input conditions to be met
-                if(LinActPos != MAX)
+                /*if(LinActPos != MAX)
                 {
                     cout << "ExtLinAct is being applied\n\n" << endl;
                     LinActPos = Max;
                     LinActPosMsg.data = LinActPos;
                     Publisher.publish(LinActPosMsg);
-                }
+                }*/
             }
             if(!go)
             {
@@ -56,9 +61,10 @@ class ExtLinAct: public AbstractCommand
                 cout << "ExtLinAct has been executed\n\n" << endl
 
             }
+            
         }
     }
-}
+};
 
 int main(void)
 {
