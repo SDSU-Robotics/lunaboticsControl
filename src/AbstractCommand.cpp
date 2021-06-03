@@ -10,6 +10,7 @@ class AbstractCommand
     public:
     
         virtual bool application() = 0;
+        virtual void resolveIssue() = 0;
 
         void initialize(bool g)              //initialization
         {
@@ -63,7 +64,10 @@ class ExtLinAct: public AbstractCommand
             
         }
 
-        void resolveIssue();    
+        void resolveIssue()
+        {
+            
+        }   
 };
 
 int main(void)
