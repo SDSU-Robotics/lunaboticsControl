@@ -12,60 +12,73 @@ class AbstractCommand
         virtual bool application() = 0;
         virtual void resolveIssue() = 0;
 
-        void initialize(bool g)              //initialization
+        void initialize(bool g)              //initialization logice
         {
-            go = g;                 //go
+            go = g;                          //tells application to go or not
         }
         bool executed(bool s)
         {
-            //finds where application finishes by stopping on finish condition
-            go = !s;                //stop
+                                             //finds where application finishes by 
+                                             //stopping it on the finish condition
+
+            go = !s;                         //tells application to not go if stop
         }
         bool errorChecker(bool c)
         {
-            check = c;              //checks for error
-                                    //error if true
-                                    //initialized false (no error at beginning)
+            check = c;                       //checks for errors
+                                             //error if true
+                                             //initialized false (no error at beginning)
         }
-
+        int errorTyper(bool t)
+        {
+            errorType = t;
+        }
+        int numError(int n)
+        {
+            numErrors = n;
+        }
     
-    protected:
     
-        bool go;
-        bool check;
+    
+        bool go;                             //variables to be modified by all classes
+        bool check;                          //that inherit AbstractCommand
         int errorType;
+        int numErrors;
     
 };
 
 
-class ExtLinAct: public AbstractCommand
+class ExampleCommand: public AbstractCommand
 {
 
     public:
 
-                                        //will not recognize as function until
-                                        //public brackets are established due to inheritance
+                                        //will not recognize this as pure vital function 
+                                        // until inheritance is established
         bool application()                   
         {
             
             if(go)
             {
                 //input conditions to be met
-                /*if(LinActPos != MAX)
+                /*if(Goal_of_Application != satisfied)
                 {
-                    cout << "ExtLinAct is being applied\n\n" << endl;
-                    LinActPos = Max;
-                    LinActPosMsg.data = LinActPos;
-                    Publisher.publish(LinActPosMsg);
+                    cout << "Example Command is being applied\n\n" << endl;
+                    Goal_of_Application = satisfied;
+                    satisfiedMsg.data = satisfied;
+                    ExamplePublisher.publish(satisfiedMsg);
                 }*/
             }
-            if(!go) //&& LinActPos == MAX)
+            if(!go && !check) 
             {
                 //conditions have been met
                 cout << "ExtLinAct has been executed\n\n" << endl;
 
             }
-            if(!go) //&& LinActPos != MAX) 
+            
+
+            //specific error case 1
+            if(!go) //&& Goal_of_Application != satisfied) 
                     //if an error occurs, check becomes true
                     //errorType becomes uniquely identified by an int
             {
@@ -77,25 +90,59 @@ class ExtLinAct: public AbstractCommand
 
         void resolveIssue()
         {
-            if(errorType == 1)              //buffers out other errors
+            if(check)                           //if error(s) occurred
             {
-                //LinActPos = Max;          //resolves the issue
+                if(errorType == 1)              //buffers out other errors
+                {
+                    //Goal = satisfied;          //resolves the issue(s)
+                    //Goal2 = satisfied;
 
-                check = false;              //resets the checker to find more
-                                            //unique errors
+                                 
+                }
+
+                check = false;                  //after all error types are resolve,
+                                                //reset checker for next application
             }
         }   
 };
 
-int main(void)
+int main()
 {
-    ExtLinAct ela;
+    ExampleCommand ExCmd;                  //list of class instances
 
-    ela.errorChecker(false);        //initializing error checkers
+    ExCmd.errorChecker(false);        //list of initializing error checkers
+                                    //*can be a list since each time resolveIssue is 
+                                    //instantiated it chooses the correct command 
+                                    // resolution; (this is accomplished by the errorType 
+                                    // set in the application's instance and the check in
+                                    //each resolveIssue instance)
 
     
-    ela.initialize(true);          
-    ela.application();              //where errors occur
-    ela.executed(true);
-    ela.resolveIssue();             //assess errors after each command
-}
+    //command process*******************************************************************
+    ExCmd.initialize(true);         //sets go to true
+    ExCmd.application();            //runs logic of application function
+    
+    if(ExCmd.errorChecker(true))                 //resolves only if error(s) detected
+    {
+        ExCmd.resolveIssue();           //checks for and resolves the issues
+                                        //(check = false)
+        ExCmd.application();            //retry application without issues 
+
+
+                                //*************************************
+                                // it may be necessary at sometime to
+                                // resolve the issue by abandoning it 
+                                // temporarily, or by initiating manual 
+                                // control (not functional in current
+                                // state)
+                                //*************************************
+    };
+
+    ExCmd.numError(ExCmd.errorType);
+    ExCmd.executed(true);                         //tells the application to stop after
+                                                  //a good run (go = false)
+    ExCmd.application();                          //exits application with !check &&
+                                                  //!go 
+};                              
+    //**********************************************************************************
+    
