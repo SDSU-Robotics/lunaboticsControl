@@ -16,7 +16,7 @@ class Command
 class Initialize : public Command
 {
     public:
-        virtual ~Initialize(){}
+        ~Initialize(){}
         bool SpecificApplication()
         {
             ROS_INFO("Initialize called");
@@ -33,7 +33,7 @@ class Initialize : public Command
 class NavToExcavate : public Command
 {
     public:
-        virtual ~NavToExcavate(){}
+        ~NavToExcavate(){}
         bool SpecificApplication()
         {
             ROS_INFO("NavToExcavate called");
@@ -50,7 +50,7 @@ class NavToExcavate : public Command
 class Excavate : public Command
 {
     public:
-        virtual ~Excavate(){}
+        ~Excavate(){}
         bool SpecificApplication()
         {
             ROS_INFO("Excavate called");
@@ -67,7 +67,7 @@ class Excavate : public Command
 class NavToSieve : public Command
 {
     public:
-        virtual ~NavToSieve(){}
+        ~NavToSieve(){}
         bool SpecificApplication()
         {
             ROS_INFO("NavToSieve called");
@@ -84,7 +84,7 @@ class NavToSieve : public Command
 class Sieve : public Command
 {
     public:
-        virtual ~Sieve(){}
+        ~Sieve(){}
         bool SpecificApplication()
         {
             ROS_INFO("Sieve called");
@@ -126,6 +126,9 @@ int main(int argc, char **argv)
                                                     // the current instance of the 
                                                     // SpecificApplication function
                                                     // until the function terminates
+
+            (*itr)->~Command();                     // destruct the instance of the
+                                                    // command when finished
 
             itr++;              // increment iterator to move onto the next command
 
