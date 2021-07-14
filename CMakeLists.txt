@@ -32,7 +32,7 @@ include_directories (src include ${catkin_INCLUDE_DIRS})
 
 
 # EXECUTABLES (ROS nodes, main function)
-add_executable(AbstractCommand ${PROJECT_SOURCE_DIR}/src/AbstractCommand.cpp)
+add_executable(Autonomy ${PROJECT_SOURCE_DIR}/src/Autonomy.cpp)
 
 # Tasking, Task Includes
 # target_link_libraries(DugNewNode Task TaskManager TaskLoop ${catkin_LIBRARIES})
