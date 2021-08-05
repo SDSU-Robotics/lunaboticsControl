@@ -9,14 +9,12 @@ using namespace std;
 class Command
 {
     public:
-        virtual ~Command(){}
         virtual bool SpecificApplication() = 0;
 };
 
 class Initialize : public Command
 {
     public:
-        ~Initialize(){}
         bool SpecificApplication()
         {
             ROS_INFO("Initialize called");
@@ -33,7 +31,6 @@ class Initialize : public Command
 class NavToExcavate : public Command
 {
     public:
-        ~NavToExcavate(){}
         bool SpecificApplication()
         {
             ROS_INFO("NavToExcavate called");
@@ -50,7 +47,6 @@ class NavToExcavate : public Command
 class Excavate : public Command
 {
     public:
-        ~Excavate(){}
         bool SpecificApplication()
         {
             ROS_INFO("Excavate called");
@@ -67,7 +63,6 @@ class Excavate : public Command
 class NavToSieve : public Command
 {
     public:
-        ~NavToSieve(){}
         bool SpecificApplication()
         {
             ROS_INFO("NavToSieve called");
@@ -84,7 +79,6 @@ class NavToSieve : public Command
 class Sieve : public Command
 {
     public:
-        ~Sieve(){}
         bool SpecificApplication()
         {
             ROS_INFO("Sieve called");
@@ -127,8 +121,8 @@ int main(int argc, char **argv)
                                                     // SpecificApplication function
                                                     // until the function terminates
 
-            (*itr)->~Command();                     // destruct the instance of the
-                                                    // command when finished
+
+            ROS_INFO("Command Destructed");
 
             itr++;              // increment iterator to move onto the next command
 
